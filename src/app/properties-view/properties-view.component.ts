@@ -26,30 +26,14 @@
  ** SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  **
  ***************************************************************************/
- :host {
-    display: grid;
-    grid-area: content;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 'toolbar' 'content';
-  }
-  .demo-separator {
-    height: 20px;
-    width: 1px;
-    background: #999;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 10px;
-  }
-  
-  .search {
-    line-height: 20px;
-    padding: 4px 8px;
-    font-size: 14px;
-    letter-spacing: normal;
-    width: 300px;
-  }
-  
-  .search:focus {
-    outline: none;
-  }
-  
+import { Component, Input } from '@angular/core'
+import { Person } from '../person'
+
+@Component({
+  selector: 'properties-view',
+  templateUrl: './properties-view.component.html',
+  styleUrls: ['./properties-view.component.css']
+})
+export class PropertiesViewComponent {
+  @Input() person!: Person
+}

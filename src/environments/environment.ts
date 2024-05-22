@@ -26,30 +26,11 @@
  ** SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  **
  ***************************************************************************/
- :host {
-    display: grid;
-    grid-area: content;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 'toolbar' 'content';
-  }
-  .demo-separator {
-    height: 20px;
-    width: 1px;
-    background: #999;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 10px;
-  }
-  
-  .search {
-    line-height: 20px;
-    padding: 4px 8px;
-    font-size: 14px;
-    letter-spacing: normal;
-    width: 300px;
-  }
-  
-  .search:focus {
-    outline: none;
-  }
-  
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `.angular-cli.json`.
+
+export const environment = {
+  production: false
+}

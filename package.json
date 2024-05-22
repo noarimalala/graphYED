@@ -18,14 +18,17 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "demo-resources": "../resources",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "yfiles": "../yFiles-for-HTML-Complete-2.6.0.4-Evaluation/lib-dev/yfiles-26.0.4+eval-dev.tgz",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.7",
+    "@angular-builders/custom-webpack": "~17.0.0",
     "@angular/cli": "^17.3.7",
     "@angular/compiler-cli": "^17.3.0",
+    "@schematics/angular": "^17.3.7",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",

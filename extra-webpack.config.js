@@ -26,30 +26,24 @@
  ** SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  **
  ***************************************************************************/
- :host {
-    display: grid;
-    grid-area: content;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 'toolbar' 'content';
+const YWorksOptimizerPlugin = require('@yworks/optimizer/webpack-plugin')
+
+module.exports = function (config) {
+  if (config.mode === 'production') {
+    // Obfuscate yFiles modules and usages for production build
+    config.plugins.push(
+      new YWorksOptimizerPlugin({
+        logLevel: 'info',
+        blacklist: ['run', 'update', 'template'],
+        shouldOptimize(module) {
+          return (
+            !/node_modules/.test(module.resource) ||
+            /node_modules[\\/](demo-resources)/.test(module.resource)
+          )
+        }
+      })
+    )
   }
-  .demo-separator {
-    height: 20px;
-    width: 1px;
-    background: #999;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 10px;
-  }
-  
-  .search {
-    line-height: 20px;
-    padding: 4px 8px;
-    font-size: 14px;
-    letter-spacing: normal;
-    width: 300px;
-  }
-  
-  .search:focus {
-    outline: none;
-  }
-  
+
+  return config
+}

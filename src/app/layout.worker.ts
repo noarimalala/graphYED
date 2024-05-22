@@ -26,30 +26,36 @@
  ** SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  **
  ***************************************************************************/
- :host {
-    display: grid;
-    grid-area: content;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 'toolbar' 'content';
-  }
-  .demo-separator {
-    height: 20px;
-    width: 1px;
-    background: #999;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 10px;
-  }
-  
-  .search {
-    line-height: 20px;
-    padding: 4px 8px;
-    font-size: 14px;
-    letter-spacing: normal;
-    width: 300px;
-  }
-  
-  .search:focus {
-    outline: none;
-  }
-  
+/// <reference lib="webworker" />
+
+import {
+  LayoutExecutorAsyncWorker,
+  LayoutGraph,
+  License,
+  OrganicEdgeRouter,
+  TreeLayout,
+  TreeReductionStage
+} from 'yfiles'
+
+import licenseData from '../license.json'
+License.value = licenseData
+
+function applyLayout(graph: LayoutGraph) {
+  const treeLayout = new TreeLayout()
+  const treeReductionStage = new TreeReductionStage()
+  treeReductionStage.nonTreeEdgeRouter = new OrganicEdgeRouter()
+  treeReductionStage.nonTreeEdgeSelectionKey = OrganicEdgeRouter.AFFECTED_EDGES_DP_KEY
+
+  treeLayout.appendStage(treeReductionStage)
+
+  treeLayout.applyLayout(graph)
+}
+
+addEventListener(
+  'message',
+  (e) => {
+    const executor = new LayoutExecutorAsyncWorker(applyLayout)
+    executor.process(e.data).then(postMessage).catch(postMessage)
+  },
+  false
+)
